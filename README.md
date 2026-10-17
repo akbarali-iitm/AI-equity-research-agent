@@ -1,5 +1,5 @@
 <!-- README.md -->
-# Super Investing · AI Innovator Assignment · Part B
+# Super Investing · AI Innovator Assignment
 
 This project generates a short, cited research brief from a ticker and a folder of
 Markdown source documents. The SRVCABLE company and its source pack are fictional;
@@ -7,12 +7,22 @@ the included documents are treated as the complete research universe.
 
 ## Assignment brief
 
-**Input:** an NSE ticker and a set of company documents. **Output:** an approximately
-one-page Markdown brief for a retail investor, with a snapshot, bull case, bear case,
-open questions, and sources for its claims. The required test case is fictional
-Sarvottam Cables Ltd (NSE: SRVCABLE), using the eight provided Markdown sources and
-an assignment as-of date of 23 September 2026. Do not search for the fictional
-company online.
+## The task
+
+Super Investing helps long-term investors research Indian stocks. Build a small **AI research agent**:
+
+> **Input:** an NSE ticker, plus a set of documents about the company
+> **Output:** a short **research brief** in Markdown
+
+The brief should have these sections:
+
+1. **Snapshot:** what the company does and its latest results, in 3–4 lines
+2. **Bull case:** the strongest reasons to be positive
+3. **Bear case:** the strongest reasons to be cautious
+4. **Open questions:** what's unclear, missing or conflicting in the sources
+5. **Sources:** every claim in the brief should be traceable to a source
+
+Keep it to about one page. It's written for a retail investor, not an analyst.
 
 ## Agent design
 
@@ -54,8 +64,8 @@ python research_agent.py SRVCABLE --documents . --as-of 2026-09-23 --output brie
 [`source_manifest.json`](./source_manifest.json). Only files named by this manifest
 are read; unrelated Markdown files are ignored. Every source must have metadata
 front matter with `source`, `url`, `published` (YYYY-MM-DD), and `type`. The ticker
-is required. The default model is `gemini-2.5-flash-lite`; override it with
-`GEMINI_MODEL` (for example, `gemini-2.5-flash` if available to your project).
+is required. The default model is `gemini-3.5-flash-lite`; override it with
+`GEMINI_MODEL` (for example, `gemini-3.5-flash` if available to your project).
 There are three primary Gemini calls per run and up to three repair attempts for an
 invalid response at each stage. API errors are reported instead of being silently
 converted into a brief.
@@ -250,7 +260,7 @@ different path:
 
 ```powershell
 $env:GEMINI_API_KEY = "your-gemini-api-key"
-$env:GEMINI_MODEL = "gemini-2.5-flash-lite"
+$env:GEMINI_MODEL = "gemini-3.5-flash-lite"
 python research_agent.py SRVCABLE `
   --documents candidate/research_pack `
   --as-of 2026-09-23 `
